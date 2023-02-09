@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA4CEC4829954D51009545C0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4CEC4729954D51009545C0 /* PostViewController.swift */; };
 		AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA589E4C2995498400FDC454 /* FeedViewController.swift */; };
 		AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA589E4E2995498C00FDC454 /* ProfileViewController.swift */; };
 		AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5DA18C298881AB0085A86F /* AppDelegate.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA4CEC4729954D51009545C0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		AA589E4C2995498400FDC454 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		AA589E4E2995498C00FDC454 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AA5DA189298881AB0085A86F /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +59,7 @@
 				AA5DA18C298881AB0085A86F /* AppDelegate.swift */,
 				AA589E4C2995498400FDC454 /* FeedViewController.swift */,
 				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
+				AA4CEC4729954D51009545C0 /* PostViewController.swift */,
 				AA5DA195298881AD0085A86F /* Assets.xcassets */,
 				AA5DA197298881AD0085A86F /* LaunchScreen.storyboard */,
 				AA5DA19A298881AD0085A86F /* Info.plist */,
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4CEC4829954D51009545C0 /* PostViewController.swift in Sources */,
 				AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */,
 				AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */,
 				AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */,

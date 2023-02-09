@@ -19,20 +19,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func setupTabBarController() -> UITabBarController {
+    private func setupTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
+        UITabBar.appearance().backgroundColor = .systemMint
         tabBarController.viewControllers = [setupFeedNavigationController(), setupProfileNavigationController()]
         return tabBarController
     }
 
-    func setupFeedNavigationController() -> UINavigationController {
+    private func setupFeedNavigationController() -> UINavigationController {
         let feedViewController = FeedViewController()
         feedViewController.title = "Feed"
         feedViewController.tabBarItem = UITabBarItem(title: "Feedd", image: UIImage(systemName: "target"), tag: 0)
         return UINavigationController(rootViewController: feedViewController)
     }
 
-    func setupProfileNavigationController() -> UINavigationController {
+    private func setupProfileNavigationController() -> UINavigationController {
         let profileViewController = ProfileViewController()
         profileViewController.title = "Profile"
         profileViewController.tabBarItem = UITabBarItem(title: "Prof", image: UIImage(systemName: "ellipsis.message"), tag: 1)

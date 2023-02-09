@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA589E4C2995498400FDC454 /* FeedViewController.swift */; };
+		AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA589E4E2995498C00FDC454 /* ProfileViewController.swift */; };
 		AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5DA18C298881AB0085A86F /* AppDelegate.swift */; };
 		AA5DA196298881AD0085A86F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5DA195298881AD0085A86F /* Assets.xcassets */; };
 		AA5DA199298881AD0085A86F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5DA197298881AD0085A86F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA589E4C2995498400FDC454 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		AA589E4E2995498C00FDC454 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AA5DA189298881AB0085A86F /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5DA18C298881AB0085A86F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA5DA195298881AD0085A86F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				AA5DA18C298881AB0085A86F /* AppDelegate.swift */,
+				AA589E4C2995498400FDC454 /* FeedViewController.swift */,
+				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
 				AA5DA195298881AD0085A86F /* Assets.xcassets */,
 				AA5DA197298881AD0085A86F /* LaunchScreen.storyboard */,
 				AA5DA19A298881AD0085A86F /* Info.plist */,
@@ -128,6 +134,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */,
+				AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */,
 				AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

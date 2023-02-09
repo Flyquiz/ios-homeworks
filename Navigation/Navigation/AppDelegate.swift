@@ -14,9 +14,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController
+        window?.rootViewController = setupTabBarController()
         window?.makeKeyAndVisible()
         return true
+    }
+
+    func setupTabBarController() -> UITabBarController {
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [setupFeedNavigationController(), setupProfileNavigationController()]
+        return tabBarController
+    }
+
+    func setupFeedNavigationController() -> UINavigationController {
+        let feedViewController = FeedViewController()
+        feedViewController.title = "Feed"
+        feedViewController.tabBarItem = UITabBarItem(title: "Feedd", image: UIImage(systemName: "target"), tag: 0)
+        return UINavigationController(rootViewController: feedViewController)
+    }
+
+    func setupProfileNavigationController() -> UINavigationController {
+        let profileViewController = ProfileViewController()
+        profileViewController.title = "Profile"
+        profileViewController.tabBarItem = UITabBarItem(title: "Prof", image: UIImage(systemName: "ellipsis.message"), tag: 1)
+        return UINavigationController(rootViewController: profileViewController)
     }
 }
 

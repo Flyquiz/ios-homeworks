@@ -11,7 +11,7 @@ final class FeedViewController: UIViewController {
 
     private var post = Post(title: "Пост")
 
-    private let button: UIButton = {
+    private let postButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         return button
     }()
@@ -19,15 +19,15 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemRed
-        setupButton()
+        setupPostButton()
     }
 
-    private func setupButton() {
-        view.addSubview(button)
-        button.setTitle(post.title, for: .normal)
-        button.backgroundColor = .black
-        button.center = view.center
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    private func setupPostButton() {
+        view.addSubview(postButton)
+        postButton.setTitle(post.title, for: .normal)
+        postButton.backgroundColor = .black
+        postButton.center = view.center
+        postButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
 
     @objc private func buttonAction() {

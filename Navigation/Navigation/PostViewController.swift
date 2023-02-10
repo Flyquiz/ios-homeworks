@@ -15,10 +15,10 @@ final class PostViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
         navigationItem.title = titleForPost
-        setupInfoController()
+        setupBarButton()
     }
 
-    private func setupInfoController() {
+    private func setupBarButton() {
         let barButton = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(barButtonAction))
         navigationItem.rightBarButtonItem = barButton
     }
@@ -26,8 +26,6 @@ final class PostViewController: UIViewController {
     @objc private func barButtonAction() {
         let infoViewController = InfoViewController()
         infoViewController.title = "Info"
-//        present(infoViewController, animated: true)
-        infoViewController.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(infoViewController, animated: true)
+        present(infoViewController, animated: true)
     }
 }

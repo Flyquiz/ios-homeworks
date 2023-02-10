@@ -9,7 +9,7 @@ import UIKit
 
 final class FeedViewController: UIViewController {
 
-    var post = Post(title: "Пост")
+    private var post = Post(title: "Пост")
 
     private let button: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
@@ -27,10 +27,10 @@ final class FeedViewController: UIViewController {
         button.setTitle(post.title, for: .normal)
         button.backgroundColor = .black
         button.center = view.center
-        button.addTarget(self, action: #selector(pressAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
 
-    @objc private func pressAction() {
+    @objc private func buttonAction() {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
         postViewController.titleForPost = post.title

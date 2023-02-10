@@ -14,6 +14,7 @@
 		AA5DA196298881AD0085A86F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5DA195298881AD0085A86F /* Assets.xcassets */; };
 		AA5DA199298881AD0085A86F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5DA197298881AD0085A86F /* LaunchScreen.storyboard */; };
 		AA73635129966B9700D698DA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA73635029966B9700D698DA /* Post.swift */; };
+		AA736353299679B700D698DA /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA736352299679B700D698DA /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		AA5DA198298881AD0085A86F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA5DA19A298881AD0085A86F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA73635029966B9700D698DA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		AA736352299679B700D698DA /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				AA589E4C2995498400FDC454 /* FeedViewController.swift */,
 				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
 				AA4CEC4729954D51009545C0 /* PostViewController.swift */,
+				AA736352299679B700D698DA /* InfoViewController.swift */,
 				AA73635029966B9700D698DA /* Post.swift */,
 				AA5DA195298881AD0085A86F /* Assets.xcassets */,
 				AA5DA197298881AD0085A86F /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */,
 				AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */,
 				AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */,
+				AA736353299679B700D698DA /* InfoViewController.swift in Sources */,
 				AA73635129966B9700D698DA /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +299,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.Navigation";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -322,7 +326,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.Navigation";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

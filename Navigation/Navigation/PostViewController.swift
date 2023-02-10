@@ -8,14 +8,12 @@
 import UIKit
 
 final class PostViewController: UIViewController {
+
+    var titleForPost: String = "null"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPostView()
-    }
-
-    private func setupPostView() {
         view.backgroundColor = .systemPink
-        navigationItem.title = "Post"
+        navigationItem.title = titleForPost
     }
 }

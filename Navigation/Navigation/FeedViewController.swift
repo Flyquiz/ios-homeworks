@@ -18,14 +18,15 @@ final class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .systemGray6
         setupPostButton()
     }
 
     private func setupPostButton() {
         view.addSubview(postButton)
         postButton.setTitle(post.title, for: .normal)
-        postButton.backgroundColor = .black
+        postButton.setTitleColor(.systemBlue, for: .normal)
+        postButton.backgroundColor = .systemGray5
         postButton.center = view.center
         postButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }

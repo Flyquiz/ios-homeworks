@@ -21,23 +21,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setupTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
-        UITabBar.appearance().backgroundColor = .systemMint
+        UITabBar.appearance().backgroundColor = .systemGray5
         tabBarController.viewControllers = [setupFeedNavigationController(), setupProfileNavigationController()]
         return tabBarController
     }
 
     private func setupFeedNavigationController() -> UINavigationController {
         let feedViewController = FeedViewController()
-        feedViewController.title = "Feed"
-        feedViewController.tabBarItem = UITabBarItem(title: "Feedd", image: UIImage(systemName: "target"), tag: 0)
+        feedViewController.title = "Лента"
+        feedViewController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "square.and.pencil.circle.fill"), tag: 0)
         return UINavigationController(rootViewController: feedViewController)
     }
 
     private func setupProfileNavigationController() -> UINavigationController {
         let profileViewController = ProfileViewController()
-        profileViewController.title = "Profile"
-        profileViewController.tabBarItem = UITabBarItem(title: "Prof", image: UIImage(systemName: "ellipsis.message"), tag: 1)
+        profileViewController.title = "Профиль"
+        profileViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.crop.circle.fill"), tag: 1)
         return UINavigationController(rootViewController: profileViewController)
     }
 }
-

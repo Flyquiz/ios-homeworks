@@ -13,13 +13,12 @@ final class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemGray6
         navigationItem.title = titleForPost
         setupBarButton()
     }
-
     private func setupBarButton() {
-        let barButton = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(barButtonAction))
+        let barButton = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(barButtonAction))
         navigationItem.rightBarButtonItem = barButton
     }
 

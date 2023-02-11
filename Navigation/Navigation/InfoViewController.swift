@@ -16,10 +16,9 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemCyan
+        view.backgroundColor = .systemGray5
         setupInfoButton()
     }
-
     private func setupInfoButton() {
         view.addSubview(infoButton)
         infoButton.setTitle("Info", for: .normal)

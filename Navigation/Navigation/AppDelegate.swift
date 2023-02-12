@@ -10,27 +10,33 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = setupTabBarController()
+        window?.makeKeyAndVisible()
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    private func setupTabBarController() -> UITabBarController {
+        let tabBarController = UITabBarController()
+        UITabBar.appearance().backgroundColor = .systemGray5
+        tabBarController.viewControllers = [setupFeedNavigationController(), setupProfileNavigationController()]
+        return tabBarController
     }
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    private func setupFeedNavigationController() -> UINavigationController {
+        let feedViewController = FeedViewController()
+        feedViewController.title = "Лента"
+        feedViewController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "square.and.pencil.circle.fill"), tag: 0)
+        return UINavigationController(rootViewController: feedViewController)
     }
 
-
+    private func setupProfileNavigationController() -> UINavigationController {
+        let profileViewController = ProfileViewController()
+        profileViewController.title = "Профиль"
+        profileViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.crop.circle.fill"), tag: 1)
+        return UINavigationController(rootViewController: profileViewController)
+    }
 }
-

@@ -62,9 +62,9 @@
 		AA5DA18B298881AB0085A86F /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				AA8D7BD129AE6EB70042F99C /* Profile */,
 				AA5DA18C298881AB0085A86F /* AppDelegate.swift */,
 				AA589E4C2995498400FDC454 /* FeedViewController.swift */,
+				AA8D7BD129AE6EB70042F99C /* Profile */,
 				AA4CEC4729954D51009545C0 /* PostViewController.swift */,
 				AA736352299679B700D698DA /* InfoViewController.swift */,
 				AA73635029966B9700D698DA /* Post.swift */,

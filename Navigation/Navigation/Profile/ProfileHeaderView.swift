@@ -9,6 +9,21 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
+    private let statusText: String = "My status SUS"
+
+    private let statusTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .white
+        textField.text = "Enter new status here"
+        textField.textAlignment = .center
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 15, weight: .regular)
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
+        textField.layer.cornerRadius = 6
+        return textField
+    }()
     private let profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,12 +45,10 @@ final class ProfileHeaderView: UIView {
     private let profileStatus: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "My status"
         label.textColor = .gray
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
     }()
-    //TODO: unfinished
     private let statusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -51,27 +64,22 @@ final class ProfileHeaderView: UIView {
     }()
 
     init() {
+        profileStatus.text = statusText
         super.init(frame: .zero)
-        setupView()
+        setupLayout()
     }
-
+    @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func statusButtonAction() {
-        print(statusButton.currentTitle!)
-    }
-
-    private func setupView() {
+    private func setupLayout() {
         addSubview(profileImage)
         addSubview(profileLabel)
         addSubview(profileStatus)
         addSubview(statusButton)
-        layout()
-    }
+        addSubview(statusTextField)
 
-    private func layout() {
         func toProfileImage() {
             NSLayoutConstraint.activate([
                 profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -104,9 +112,19 @@ final class ProfileHeaderView: UIView {
                 statusButton.heightAnchor.constraint(equalToConstant: 50)
             ])
         }
+        func toStatusTextField() {
+            NSLayoutConstraint.activate([
+                statusTextField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -7),
+                statusTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
+                statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+                statusTextField.heightAnchor.constraint(equalToConstant: 20)
+            ])
+        }
+
         toProfileImage()
         toProfileLabel()
         toProfileStatus()
         toStatusButton()
+        toStatusTextField()
     }
 }

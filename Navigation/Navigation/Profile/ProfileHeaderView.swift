@@ -9,19 +9,20 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
-    private let statusText: String = "My status SUS"
+    private var statusText: String = "Old status"
 
     private let statusTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
-        textField.text = "Enter new status here"
+        textField.placeholder = "Enter new status here"
         textField.textAlignment = .center
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 6
+        textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
         return textField
     }()
     private let profileImage: UIImageView = {
@@ -59,7 +60,7 @@ final class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-        button.addTarget(ProfileHeaderView.self, action: #selector(statusButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(statusButtonAction), for: .touchUpInside)
         return button
     }()
 
@@ -71,6 +72,15 @@ final class ProfileHeaderView: UIView {
     @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc func statusButtonAction() {
+        profileStatus.text = statusText
+        statusTextField.text = nil
+        statusTextField.endEditing(true)
+    }
+    @objc func textFieldAction(_ textField: UITextField) {
+        statusText = textField.text!
     }
 
     private func setupLayout() {

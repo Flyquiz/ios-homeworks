@@ -14,8 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        //TODO: check to tabBarController
-        window?.rootViewController = setupProfileNavigationController()
+        window?.rootViewController = setupTabBarController()
         window?.makeKeyAndVisible()
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().barTintColor = .white

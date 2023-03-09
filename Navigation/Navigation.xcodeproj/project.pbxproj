@@ -15,6 +15,7 @@
 		AA5DA199298881AD0085A86F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5DA197298881AD0085A86F /* LaunchScreen.storyboard */; };
 		AA73635129966B9700D698DA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA73635029966B9700D698DA /* Post.swift */; };
 		AA736353299679B700D698DA /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA736352299679B700D698DA /* InfoViewController.swift */; };
+		AA8D7BD329AE6FE50042F99C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		AA5DA19A298881AD0085A86F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA73635029966B9700D698DA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		AA736352299679B700D698DA /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +64,7 @@
 			children = (
 				AA5DA18C298881AB0085A86F /* AppDelegate.swift */,
 				AA589E4C2995498400FDC454 /* FeedViewController.swift */,
-				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
+				AA8D7BD129AE6EB70042F99C /* Profile */,
 				AA4CEC4729954D51009545C0 /* PostViewController.swift */,
 				AA736352299679B700D698DA /* InfoViewController.swift */,
 				AA73635029966B9700D698DA /* Post.swift */,
@@ -71,6 +73,15 @@
 				AA5DA19A298881AD0085A86F /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		AA8D7BD129AE6EB70042F99C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
+				AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +158,7 @@
 				AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */,
 				AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */,
 				AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */,
+				AA8D7BD329AE6FE50042F99C /* ProfileHeaderView.swift in Sources */,
 				AA736353299679B700D698DA /* InfoViewController.swift in Sources */,
 				AA73635129966B9700D698DA /* Post.swift in Sources */,
 			);

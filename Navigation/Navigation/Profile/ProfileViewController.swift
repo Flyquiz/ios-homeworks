@@ -41,7 +41,5 @@ final class ProfileViewController: UIViewController {
             bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.intrinsicContentSize.height)
         ])
-
-        bottomButton.backgroundColor = .white
     }
 }

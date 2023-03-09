@@ -43,5 +43,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UINavigationController(rootViewController: profileViewController)
     }
 }
-
-//MARK: For commit

@@ -24,6 +24,7 @@ final class FeedViewController: UIViewController {
         button.backgroundColor = .systemGray5
         return button
     }()
+
     private let toPostButton2: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +32,7 @@ final class FeedViewController: UIViewController {
         button.backgroundColor = .systemGray5
         return button
     }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,7 @@ final class FeedViewController: UIViewController {
         toPostButton1.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         toPostButton2.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
+    
     @objc private func buttonAction() {
         let postVC = PostViewController()
         self.navigationController?.pushViewController(postVC, animated: true)

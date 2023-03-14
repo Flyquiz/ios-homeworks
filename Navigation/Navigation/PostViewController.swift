@@ -17,6 +17,7 @@ final class PostViewController: UIViewController {
         navigationItem.title = titleForPost
         setupBarButton()
     }
+    
     private func setupBarButton() {
         let barButton = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(barButtonAction))
         navigationItem.rightBarButtonItem = barButton

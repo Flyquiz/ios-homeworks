@@ -11,7 +11,7 @@ final class ProfileHeaderView: UIView {
 
     private var statusText: String = "Old status"
 
-    private let statusTextField: UITextField = {
+    private lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
@@ -25,6 +25,7 @@ final class ProfileHeaderView: UIView {
         textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
         return textField
     }()
+
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +36,7 @@ final class ProfileHeaderView: UIView {
         imageView.layer.cornerRadius = 50
         return imageView
     }()
+
     private let fullNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +45,7 @@ final class ProfileHeaderView: UIView {
         label.font = .systemFont(ofSize: 18, weight: .bold)
         return label
     }()
+
     private let satusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +53,8 @@ final class ProfileHeaderView: UIView {
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
     }()
-    private let setStatusButton: UIButton = {
+
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
@@ -64,6 +68,7 @@ final class ProfileHeaderView: UIView {
         return button
     }()
 
+
     init() {
         satusLabel.text = statusText
         super.init(frame: .zero)
@@ -74,11 +79,13 @@ final class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+
     @objc func statusButtonAction() {
         satusLabel.text = statusText
         statusTextField.text = nil
         statusTextField.endEditing(true)
     }
+
     @objc func textFieldAction(_ textField: UITextField) {
         statusText = textField.text!
     }

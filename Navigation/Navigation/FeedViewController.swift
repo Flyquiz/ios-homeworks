@@ -10,29 +10,66 @@ import UIKit
 final class FeedViewController: UIViewController {
 
     private var post = Post(title: "Пост")
-    private let postButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private let toPostButton1: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.backgroundColor = .systemGray5
         return button
     }()
-    
+
+    private let toPostButton2: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.backgroundColor = .systemGray5
+        return button
+    }()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
-        setupPostButton()
-    }
-    private func setupPostButton() {
-        view.addSubview(postButton)
-        postButton.setTitle(post.title, for: .normal)
-        postButton.setTitleColor(.systemBlue, for: .normal)
-        postButton.backgroundColor = .systemGray5
-        postButton.center = view.center
-        postButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        setupLayout()
+        setupButtons()
     }
 
+    private func setupButtons() {
+        toPostButton1.setTitle(post.title, for: .normal)
+        toPostButton2.setTitle(post.title, for: .normal)
+        toPostButton1.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        toPostButton2.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    }
+    
     @objc private func buttonAction() {
-        let postViewController = PostViewController()
-        self.navigationController?.pushViewController(postViewController, animated: true)
-        postViewController.titleForPost = post.title
+        let postVC = PostViewController()
+        self.navigationController?.pushViewController(postVC, animated: true)
+        postVC.titleForPost = post.title
     }
 
+    private func setupLayout() {
+        view.addSubview(stackView)
+
+        stackView.axis = .vertical
+        stackView.addArrangedSubview(toPostButton1)
+        stackView.addArrangedSubview(toPostButton2)
+        stackView.spacing = 10
+
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            toPostButton1.heightAnchor.constraint(equalToConstant: 50),
+            toPostButton1.widthAnchor.constraint(equalToConstant: 100),
+            toPostButton2.heightAnchor.constraint(equalToConstant: 50),
+            toPostButton2.widthAnchor.constraint(equalToConstant: 100)
+        ])
+    }
 }

@@ -8,6 +8,20 @@
 import UIKit
 
 final class LogInViewController: UIViewController {
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
 
     private lazy var logoImage: UIImageView = {
         let imageView = UIImageView()
@@ -90,23 +104,38 @@ final class LogInViewController: UIViewController {
 
     private func setupLayout() {
         view.backgroundColor = .white
-        view.addSubview(logoImage)
-        view.addSubview(authTextView)
-        view.addSubview(logInButton)
-
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(logoImage)
+        contentView.addSubview(authTextView)
+        contentView.addSubview(logInButton)
+        
+        let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            logoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
-            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.bottomAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 20),
+            
+            logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
+            logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoImage.heightAnchor.constraint(equalToConstant: 100),
             logoImage.widthAnchor.constraint(equalToConstant: 100),
-
+            
             authTextView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
-            authTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            authTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            authTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            authTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             authTextView.heightAnchor.constraint(equalToConstant: 100),
-
+            
             logInButton.topAnchor.constraint(equalTo: authTextView.bottomAnchor, constant: 16),
-            logInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             logInButton.widthAnchor.constraint(equalTo: authTextView.widthAnchor)
         ])

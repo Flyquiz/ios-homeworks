@@ -9,6 +9,8 @@ import UIKit
 
 final class LogInViewController: UIViewController {
     
+    private let notification = NotificationCenter.default
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -68,6 +70,9 @@ final class LogInViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         passwordTextField.setLeftPadding(10)
 
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        
         return textView
     }()
 
@@ -101,7 +106,27 @@ final class LogInViewController: UIViewController {
         setupLayout()
         view.addTapGestureToHideKeyboard()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        notification.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notification.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        notification.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notification.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardShow(notification: NSNotification) {
+        if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            scrollView.contentInset.bottom = keyboardSize.height
+        }
+    }
 
+    @objc private func keyboardHide(){
+        scrollView.contentInset.bottom = .zero
+    }
+    
     private func setupLayout() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -109,7 +134,7 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logoImage)
         contentView.addSubview(authTextView)
         contentView.addSubview(logInButton)
-        
+//TODO: Проверить констреинты contentView
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
@@ -122,7 +147,7 @@ final class LogInViewController: UIViewController {
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.bottomAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 20),
+//            contentView.bottomAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 20),
             
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -137,7 +162,8 @@ final class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: authTextView.bottomAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.widthAnchor.constraint(equalTo: authTextView.widthAnchor)
+            logInButton.widthAnchor.constraint(equalTo: authTextView.widthAnchor),
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
 }
@@ -174,5 +200,12 @@ extension UITextField {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.leftView = paddingView
         self.leftViewMode = .always
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
 }

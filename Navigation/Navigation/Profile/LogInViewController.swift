@@ -33,8 +33,6 @@ final class LogInViewController: UIViewController {
         return imageView
     }()
     
-//TODO: Клавиатууры
-//    Спрятать при нажатии return
     private lazy var authTextView: UIView = {
         let textView = UIView()
         let usernameTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 500, height: 50))
@@ -85,7 +83,8 @@ final class LogInViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         checkLoginButtonStates()
         button.layer.cornerRadius = 10
-//Васянство
+        button.addTarget(self, action: #selector(logInButtonAction), for: .touchUpInside)
+        
         func checkLoginButtonStates() {
             switch button.state {
             case .normal: button.alpha = 1
@@ -96,6 +95,7 @@ final class LogInViewController: UIViewController {
                 break
             }
         }
+        
         return button
     }()
     
@@ -127,6 +127,10 @@ final class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = .zero
     }
     
+    @objc private func logInButtonAction() {
+        navigationController?.pushViewController(ProfileViewController(), animated: true)
+    }
+    
     private func setupLayout() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -134,7 +138,7 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logoImage)
         contentView.addSubview(authTextView)
         contentView.addSubview(logInButton)
-//TODO: Проверить констреинты contentView
+        
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
@@ -147,7 +151,6 @@ final class LogInViewController: UIViewController {
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-//            contentView.bottomAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 20),
             
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -175,10 +178,11 @@ extension UIColor {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
-
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+        self.init(red: CGFloat(red) / 255.0,
+                  green: CGFloat(green) / 255.0,
+                  blue: CGFloat(blue) / 255.0,
+                  alpha: 1.0)
     }
-
     convenience init(rgb: Int) {
         self.init(
             red: (rgb >> 16) & 0xFF,

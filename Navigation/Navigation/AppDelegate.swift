@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupProfileNavigationController() -> UINavigationController {
-//TODO: Поменять обратно
         let profileViewController = LogInViewController()
         profileViewController.title = "Профиль"
         profileViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.crop.circle.fill"), tag: 1)

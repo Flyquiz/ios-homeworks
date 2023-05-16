@@ -33,47 +33,62 @@ final class LogInViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var authTextView: UIView = {
-        let textView = UIView()
-        let usernameTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 500, height: 50))
-        let passwordTextField = UITextField(frame: CGRect(x: 0, y: 50, width: 500, height: 50))
-        textView.addSubview(usernameTextField)
-        textView.addSubview(passwordTextField)
-        textView.clipsToBounds = true
-        textView.translatesAutoresizingMaskIntoConstraints = false
-
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.borderWidth = 0.5
-        textView.layer.cornerRadius = 10
-        usernameTextField.layer.borderColor = UIColor.lightGray.cgColor
-        usernameTextField.layer.borderWidth = 0.25
-        passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        passwordTextField.layer.borderWidth = 0.25
-
-        usernameTextField.keyboardType = .emailAddress
-        usernameTextField.placeholder = "Email of phone"
-        usernameTextField.backgroundColor = .systemGray6
-        usernameTextField.textColor = .black
-        usernameTextField.font = .systemFont(ofSize: 16)
-        usernameTextField.tintColor = UIColor(rgb: 0x4885CC)
-        usernameTextField.autocapitalizationType = .none
-        usernameTextField.setLeftPadding(10)
-
-        passwordTextField.placeholder = "Password"
-        passwordTextField.backgroundColor = .systemGray6
-        passwordTextField.textColor = .black
-        passwordTextField.font = .systemFont(ofSize: 16)
-        passwordTextField.tintColor = UIColor(rgb: 0x4885CC)
-        passwordTextField.autocapitalizationType = .none
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.setLeftPadding(10)
-
-        usernameTextField.delegate = self
-        passwordTextField.delegate = self
-        
-        return textView
+    private lazy var usernameTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = .emailAddress
+        textField.backgroundColor = .systemGray6
+        textField.placeholder = "Email of phone"
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 16)
+        textField.tintColor = UIColor(rgb: 0x4885CC)
+        textField.autocapitalizationType = .none
+        textField.setLeftPadding(10)
+        textField.delegate = self
+        return textField
     }()
-
+    
+    private lazy var passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .systemGray6
+        textField.isSecureTextEntry = true
+        textField.placeholder = "Password"
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 16)
+        textField.tintColor = UIColor(rgb: 0x4885CC)
+        textField.autocapitalizationType = .none
+        textField.setLeftPadding(10)
+        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderWidth = 0.25
+        return view
+    }()
+    
+    private lazy var authContentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var authScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.clipsToBounds = true
+        scrollView.layer.borderColor = UIColor.lightGray.cgColor
+        scrollView.layer.borderWidth = 0.5
+        scrollView.layer.cornerRadius = 10
+        return scrollView
+    }()
+    
     private lazy var logInButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -117,7 +132,7 @@ final class LogInViewController: UIViewController {
         notification.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc private func keyboardShow(notification: NSNotification) {
+    @objc private func keyboardShow(notification: Notification) {
         if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             scrollView.contentInset.bottom = keyboardSize.height
         }
@@ -135,16 +150,21 @@ final class LogInViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        
         contentView.addSubview(logoImage)
-        contentView.addSubview(authTextView)
+        contentView.addSubview(authScrollView)
         contentView.addSubview(logInButton)
         
-        let safeAreaGuide = view.safeAreaLayoutGuide
+        authScrollView.addSubview(authContentView)
+        authContentView.addSubview(usernameTextField)
+        authContentView.addSubview(separatorView)
+        authContentView.addSubview(passwordTextField)
+        
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -157,16 +177,40 @@ final class LogInViewController: UIViewController {
             logoImage.heightAnchor.constraint(equalToConstant: 100),
             logoImage.widthAnchor.constraint(equalToConstant: 100),
             
-            authTextView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
-            authTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            authTextView.heightAnchor.constraint(equalToConstant: 100),
             
-            logInButton.topAnchor.constraint(equalTo: authTextView.bottomAnchor, constant: 16),
-            logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            authScrollView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
+            authScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            authScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            authScrollView.heightAnchor.constraint(equalToConstant: 100),
+            
+            authContentView.topAnchor.constraint(equalTo: authScrollView.topAnchor),
+            authContentView.bottomAnchor.constraint(equalTo: authScrollView.bottomAnchor),
+            authContentView.leadingAnchor.constraint(equalTo: authScrollView.leadingAnchor),
+            authContentView.trailingAnchor.constraint(equalTo: authScrollView.trailingAnchor),
+            authContentView.widthAnchor.constraint(equalTo: authScrollView.widthAnchor),
+            
+            usernameTextField.topAnchor.constraint(equalTo: authContentView.topAnchor),
+            usernameTextField.leadingAnchor.constraint(equalTo: authContentView.leadingAnchor),
+            usernameTextField.trailingAnchor.constraint(equalTo: authContentView.trailingAnchor),
+            usernameTextField.heightAnchor.constraint(equalToConstant: 49.75),
+            
+            separatorView.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor),
+            separatorView.leadingAnchor.constraint(equalTo: authContentView.leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: authContentView.trailingAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: authContentView.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: authContentView.trailingAnchor),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 49.75),
+            passwordTextField.bottomAnchor.constraint(equalTo: authContentView.bottomAnchor),
+            
+            
+            logInButton.topAnchor.constraint(equalTo: authContentView.bottomAnchor, constant: 16),
+            logInButton.centerXAnchor.constraint(equalTo: authContentView.centerXAnchor),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.widthAnchor.constraint(equalTo: authTextView.widthAnchor),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            logInButton.widthAnchor.constraint(equalTo: authContentView.widthAnchor),
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 }

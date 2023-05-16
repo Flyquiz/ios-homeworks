@@ -71,22 +71,15 @@ final class LogInViewController: UIViewController {
         return view
     }()
     
-    private lazy var authContentView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var authScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.clipsToBounds = true
-        scrollView.layer.borderColor = UIColor.lightGray.cgColor
-        scrollView.layer.borderWidth = 0.5
-        scrollView.layer.cornerRadius = 10
-        return scrollView
+    private lazy var authStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.clipsToBounds = true
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.cornerRadius = 10
+        return stackView
     }()
     
     private lazy var logInButton: UIButton = {
@@ -152,13 +145,12 @@ final class LogInViewController: UIViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(logoImage)
-        contentView.addSubview(authScrollView)
+        contentView.addSubview(authStackView)
         contentView.addSubview(logInButton)
         
-        authScrollView.addSubview(authContentView)
-        authContentView.addSubview(usernameTextField)
-        authContentView.addSubview(separatorView)
-        authContentView.addSubview(passwordTextField)
+        authStackView.addArrangedSubview(usernameTextField)
+        authStackView.addArrangedSubview(separatorView)
+        authStackView.addArrangedSubview(passwordTextField)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -178,38 +170,20 @@ final class LogInViewController: UIViewController {
             logoImage.widthAnchor.constraint(equalToConstant: 100),
             
             
-            authScrollView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
-            authScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            authScrollView.heightAnchor.constraint(equalToConstant: 100),
+            authStackView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
+            authStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            authStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            authStackView.heightAnchor.constraint(equalToConstant: 100),
             
-            authContentView.topAnchor.constraint(equalTo: authScrollView.topAnchor),
-            authContentView.bottomAnchor.constraint(equalTo: authScrollView.bottomAnchor),
-            authContentView.leadingAnchor.constraint(equalTo: authScrollView.leadingAnchor),
-            authContentView.trailingAnchor.constraint(equalTo: authScrollView.trailingAnchor),
-            authContentView.widthAnchor.constraint(equalTo: authScrollView.widthAnchor),
-            
-            usernameTextField.topAnchor.constraint(equalTo: authContentView.topAnchor),
-            usernameTextField.leadingAnchor.constraint(equalTo: authContentView.leadingAnchor),
-            usernameTextField.trailingAnchor.constraint(equalTo: authContentView.trailingAnchor),
-            usernameTextField.heightAnchor.constraint(equalToConstant: 49.75),
-            
-            separatorView.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor),
-            separatorView.leadingAnchor.constraint(equalTo: authContentView.leadingAnchor),
-            separatorView.trailingAnchor.constraint(equalTo: authContentView.trailingAnchor),
+            usernameTextField.heightAnchor.constraint(equalToConstant: 49.25),
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
-            
-            passwordTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor),
-            passwordTextField.leadingAnchor.constraint(equalTo: authContentView.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: authContentView.trailingAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 49.75),
-            passwordTextField.bottomAnchor.constraint(equalTo: authContentView.bottomAnchor),
+            passwordTextField.heightAnchor.constraint(equalTo: usernameTextField.heightAnchor),
             
             
-            logInButton.topAnchor.constraint(equalTo: authContentView.bottomAnchor, constant: 16),
-            logInButton.centerXAnchor.constraint(equalTo: authContentView.centerXAnchor),
+            logInButton.topAnchor.constraint(equalTo: authStackView.bottomAnchor, constant: 16),
+            logInButton.centerXAnchor.constraint(equalTo: authStackView.centerXAnchor),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.widthAnchor.constraint(equalTo: authContentView.widthAnchor),
+            logInButton.widthAnchor.constraint(equalTo: authStackView.widthAnchor),
             logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }

@@ -116,11 +116,13 @@ final class LogInViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         notification.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         notification.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
         notification.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         notification.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }

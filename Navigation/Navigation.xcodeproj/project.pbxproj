@@ -16,6 +16,7 @@
 		AA73635129966B9700D698DA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA73635029966B9700D698DA /* Post.swift */; };
 		AA736353299679B700D698DA /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA736352299679B700D698DA /* InfoViewController.swift */; };
 		AA8D7BD329AE6FE50042F99C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */; };
+		AAD66E2929C0B26100F7DE42 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		AA73635029966B9700D698DA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		AA736352299679B700D698DA /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
 				AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */,
+				AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */,
 				AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */,
 				AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */,
+				AAD66E2929C0B26100F7DE42 /* LogInViewController.swift in Sources */,
 				AA8D7BD329AE6FE50042F99C /* ProfileHeaderView.swift in Sources */,
 				AA736353299679B700D698DA /* InfoViewController.swift in Sources */,
 				AA73635129966B9700D698DA /* Post.swift in Sources */,
@@ -311,7 +315,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Navigation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.navigation1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -338,7 +342,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Navigation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.navigation1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

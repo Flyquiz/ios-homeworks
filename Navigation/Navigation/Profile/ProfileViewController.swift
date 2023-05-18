@@ -16,13 +16,13 @@ final class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupLayout()
     }
     
     private func setupLayout() {
@@ -49,6 +49,14 @@ extension ProfileViewController: UITableViewDataSource {
     
     //MARK: Настроить ячейку
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier) as! PostTableViewCell
+        cell.setupCell(model: postModel[indexPath.row])
+        return cell
+    }
+}
+
+extension UIView {
+    static var identifier: String {
+        String(describing: self)
     }
 }

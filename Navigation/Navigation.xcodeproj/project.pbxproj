@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA0F85012A1699C6006D5701 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F85002A1699C6006D5701 /* PostModel.swift */; };
+		AA0F85032A16B78D006D5701 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F85022A16B78D006D5701 /* PostTableViewCell.swift */; };
 		AA4CEC4829954D51009545C0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4CEC4729954D51009545C0 /* PostViewController.swift */; };
 		AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA589E4C2995498400FDC454 /* FeedViewController.swift */; };
 		AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA589E4E2995498C00FDC454 /* ProfileViewController.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		AA0F85002A1699C6006D5701 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		AA0F85022A16B78D006D5701 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		AA4CEC4729954D51009545C0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		AA589E4C2995498400FDC454 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		AA589E4E2995498C00FDC454 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -90,10 +92,11 @@
 		AA8D7BD129AE6EB70042F99C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */,
 				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
 				AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */,
-				AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */,
 				AA0F85002A1699C6006D5701 /* PostModel.swift */,
+				AA0F85022A16B78D006D5701 /* PostTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */,
 				AAD66E2929C0B26100F7DE42 /* LogInViewController.swift in Sources */,
 				AA8D7BD329AE6FE50042F99C /* ProfileHeaderView.swift in Sources */,
+				AA0F85032A16B78D006D5701 /* PostTableViewCell.swift in Sources */,
 				AA736353299679B700D698DA /* InfoViewController.swift in Sources */,
 				AA73635129966B9700D698DA /* FeedPost.swift in Sources */,
 			);

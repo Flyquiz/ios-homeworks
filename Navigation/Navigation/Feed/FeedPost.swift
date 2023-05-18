@@ -5,7 +5,7 @@
 //  Created by Иван Захаров on 10.02.2023.
 //
 
-struct Post {
+struct FeedPost {
 
     var title: String
     

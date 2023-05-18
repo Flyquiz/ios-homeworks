@@ -14,7 +14,7 @@ struct Post {
     let likes: Int
     let views: Int
     
-    static func mockModel() -> [Post] {
+    static func makeMockModel() -> [Post] {
         var model = [Post]()
         model.append(Post(author: "Music.world", description: "Это замечательный инструмент, обойтись без которого сложно в любом музыкальном направлении. Бас-гитара — это одновременно и ритм, и мелодия, составляющие основу композиции. Бас достаточно прост в освоении, и обучение игры на нем приятно и несложно.", image: "bass.png", likes: 1, views: 1))
         

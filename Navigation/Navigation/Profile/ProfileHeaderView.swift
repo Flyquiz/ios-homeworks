@@ -23,6 +23,7 @@ final class ProfileHeaderView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 6
         textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
+        textField.delegate = self
         return textField
     }()
 
@@ -53,7 +54,7 @@ final class ProfileHeaderView: UIView {
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
     }()
-//TODO: Поменять название
+    
     private lazy var statusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -91,11 +92,9 @@ final class ProfileHeaderView: UIView {
     }
 
     private func setupLayout() {
-        addSubview(avatarImageView)
-        addSubview(fullNameLabel)
-        addSubview(statusLabel)
-        addSubview(statusButton)
-        addSubview(statusTextField)
+        [avatarImageView, fullNameLabel, statusLabel, statusButton, statusTextField].forEach {
+            addSubview($0)
+        }
         
             NSLayoutConstraint.activate([
                 avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -124,5 +123,13 @@ final class ProfileHeaderView: UIView {
                 statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
                 statusTextField.heightAnchor.constraint(equalToConstant: 40)
             ])
+    }
+}
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        statusText = textField.text!
+        statusButtonAction()
+        return true
     }
 }

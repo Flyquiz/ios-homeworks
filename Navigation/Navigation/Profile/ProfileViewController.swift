@@ -16,6 +16,7 @@ final class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
+//        tableView.contentInsetAdjustmentBehavior = .never
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         return tableView
     }()
@@ -28,6 +29,7 @@ final class ProfileViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(mainTableView)
         
+        mainTableView.backgroundColor = .lightGray
         NSLayoutConstraint.activate([
             mainTableView.topAnchor.constraint(equalTo: view.topAnchor),
             mainTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -38,7 +40,11 @@ final class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ProfileHeaderView()
+        header.backgroundColor = mainTableView.backgroundColor
+        return header
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {

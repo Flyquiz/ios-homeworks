@@ -18,6 +18,9 @@
 		AA73635129966B9700D698DA /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA73635029966B9700D698DA /* FeedPost.swift */; };
 		AA736353299679B700D698DA /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA736352299679B700D698DA /* InfoViewController.swift */; };
 		AA8D7BD329AE6FE50042F99C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */; };
+		AAB4B0BB2A1E8751002ACF9C /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4B0BA2A1E8751002ACF9C /* PhotosTableViewCell.swift */; };
+		AAB4B0BD2A1E8F77002ACF9C /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4B0BC2A1E8F77002ACF9C /* PhotosModel.swift */; };
+		AAB4B0BF2A1E92F1002ACF9C /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4B0BE2A1E92F1002ACF9C /* PhotosCollectionViewCell.swift */; };
 		AAD66E2929C0B26100F7DE42 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +38,9 @@
 		AA73635029966B9700D698DA /* FeedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
 		AA736352299679B700D698DA /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		AAB4B0BA2A1E8751002ACF9C /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		AAB4B0BC2A1E8F77002ACF9C /* PhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModel.swift; sourceTree = "<group>"; };
+		AAB4B0BE2A1E92F1002ACF9C /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,11 +100,30 @@
 			children = (
 				AAD66E2829C0B26100F7DE42 /* LogInViewController.swift */,
 				AA589E4E2995498C00FDC454 /* ProfileViewController.swift */,
-				AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */,
-				AA0F85002A1699C6006D5701 /* PostModel.swift */,
-				AA0F85022A16B78D006D5701 /* PostTableViewCell.swift */,
+				AAB4B0C12A1EA0FC002ACF9C /* ProfileTableView */,
+				AAB4B0C22A1EA14E002ACF9C /* PhotosContentView */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		AAB4B0C12A1EA0FC002ACF9C /* ProfileTableView */ = {
+			isa = PBXGroup;
+			children = (
+				AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */,
+				AA0F85022A16B78D006D5701 /* PostTableViewCell.swift */,
+				AA0F85002A1699C6006D5701 /* PostModel.swift */,
+			);
+			path = ProfileTableView;
+			sourceTree = "<group>";
+		};
+		AAB4B0C22A1EA14E002ACF9C /* PhotosContentView */ = {
+			isa = PBXGroup;
+			children = (
+				AAB4B0BA2A1E8751002ACF9C /* PhotosTableViewCell.swift */,
+				AAB4B0BE2A1E92F1002ACF9C /* PhotosCollectionViewCell.swift */,
+				AAB4B0BC2A1E8F77002ACF9C /* PhotosModel.swift */,
+			);
+			path = PhotosContentView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,7 +198,10 @@
 			files = (
 				AA4CEC4829954D51009545C0 /* PostViewController.swift in Sources */,
 				AA0F85012A1699C6006D5701 /* PostModel.swift in Sources */,
+				AAB4B0BD2A1E8F77002ACF9C /* PhotosModel.swift in Sources */,
 				AA589E4F2995498C00FDC454 /* ProfileViewController.swift in Sources */,
+				AAB4B0BF2A1E92F1002ACF9C /* PhotosCollectionViewCell.swift in Sources */,
+				AAB4B0BB2A1E8751002ACF9C /* PhotosTableViewCell.swift in Sources */,
 				AA589E4D2995498400FDC454 /* FeedViewController.swift in Sources */,
 				AA5DA18D298881AB0085A86F /* AppDelegate.swift in Sources */,
 				AAD66E2929C0B26100F7DE42 /* LogInViewController.swift in Sources */,

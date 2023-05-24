@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "color harmony.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

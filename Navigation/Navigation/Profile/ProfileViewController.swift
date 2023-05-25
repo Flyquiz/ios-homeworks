@@ -23,6 +23,7 @@ final class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         return tableView
     }()
 
@@ -52,24 +53,46 @@ final class ProfileViewController: UIViewController {
     }
 }
 
-
+//MARK: DataSource
 extension ProfileViewController: UITableViewDataSource {
+//MARK: Кол-во ячеек
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postModel.count
+        switch section {
+        case 0:
+            return 1
+        default:
+            return postModel.count
+        }
     }
-    
+//MARK: Добавление ячеек
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier) as! PostTableViewCell
-        cell.setupCell(model: postModel[indexPath.row])
-        return cell
+        switch indexPath.section {
+        case 0:
+            let photosCell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier) as! PhotosTableViewCell
+            return photosCell
+        default:
+            let tableCell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier) as! PostTableViewCell
+            tableCell.setupCell(model: postModel[indexPath.row])
+            return tableCell
+        }
+    }
+//MARK: Кол-во секций
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
 }
-
+//MARK: Delegate
 extension ProfileViewController: UITableViewDelegate {
+//MARK: Хедер
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = ProfileHeaderView()
-        header.backgroundColor = mainTableView.backgroundColor
-        return header
+        switch section {
+        case 0:
+            let header = ProfileHeaderView()
+            header.backgroundColor = mainTableView.backgroundColor
+            return header
+        default:
+            return nil
+        }
     }
 }
 

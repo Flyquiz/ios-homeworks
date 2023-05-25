@@ -9,7 +9,7 @@ import UIKit
 
 final class PhotosTableViewCell: UITableViewCell {
     
-    private let model = Photos.makeMockModel()
+    private let photosModel = Photos.makeMockModel()
     
     private lazy var tablePhotosCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -18,6 +18,7 @@ final class PhotosTableViewCell: UITableViewCell {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
         return collectionView
     }()
     
@@ -55,32 +56,49 @@ final class PhotosTableViewCell: UITableViewCell {
         }
         //TODO: Возможно лейаут опять мертворожденный. Нужно попробовать задать отступы через делегат скроллвью
         NSLayoutConstraint.activate([
-            photosLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            photosLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            photosLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            photosLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             
-            navigationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 12),
+            navigationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 12),
             navigationButton.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
             
-            tablePhotosCollectionView.topAnchor.constraint(equalTo: photosLabel.topAnchor),
-            tablePhotosCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tablePhotosCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tablePhotosCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            tablePhotosCollectionView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor),
+            tablePhotosCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            tablePhotosCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            tablePhotosCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
 }
 
 
 extension PhotosTableViewCell: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        model.count
+        photosModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-     return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
+        cell.setupCell(model: photosModel[indexPath.item])
+        return cell
     }
 }
 
-extension PhotosTableViewCell: UICollectionViewDelegate {
+extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
+//MARK: Размеры картинок
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let wigth = (collectionView.bounds.width - 12 * 4) / 4
+        return CGSize(width: wigth, height: wigth)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+    }
+    
     
 }
+
+
+//TODO: Ячейка из tabbleview нормально кастит свой размер. Проблема в том что этот размер задается ДО развертывания contentView

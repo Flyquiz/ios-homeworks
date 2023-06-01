@@ -14,7 +14,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 6
         return imageView
     }()
     
@@ -37,6 +36,10 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         cellImageView.image = model.image
     }
     
+    public func changeImageCornerRadius() {
+        cellImageView.layer.cornerRadius = 6
+    }
+ 
     private func setupLayout() {
         contentView.addSubview(cellImageView)
         NSLayoutConstraint.activate([

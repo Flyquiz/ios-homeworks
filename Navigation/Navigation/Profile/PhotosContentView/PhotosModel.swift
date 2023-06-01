@@ -12,8 +12,10 @@ struct Photos {
     
     static func makeMockModel() -> [Photos] {
         var model = [Photos]()
+        var count = 0
         for _ in 1...20  {
-            model.append(Photos(image: UIImage(named: "letov")!))
+            count += 1
+            model.append(Photos(image: UIImage(named: String(count))!))
         }
         return model
     }

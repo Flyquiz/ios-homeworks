@@ -113,6 +113,7 @@
 			children = (
 				AA8D7BD229AE6FE50042F99C /* ProfileHeaderView.swift */,
 				AA0F85022A16B78D006D5701 /* PostTableViewCell.swift */,
+				AAB4B0BA2A1E8751002ACF9C /* PhotosTableViewCell.swift */,
 				AA0F85002A1699C6006D5701 /* PostModel.swift */,
 			);
 			path = ProfileTableView;
@@ -121,7 +122,6 @@
 		AAB4B0C22A1EA14E002ACF9C /* PhotosContentView */ = {
 			isa = PBXGroup;
 			children = (
-				AAB4B0BA2A1E8751002ACF9C /* PhotosTableViewCell.swift */,
 				AAB4B0BE2A1E92F1002ACF9C /* PhotosCollectionViewCell.swift */,
 				AA6F5B2C2A27ADD900A32002 /* PhotosViewController.swift */,
 				AAB4B0BC2A1E8F77002ACF9C /* PhotosModel.swift */,

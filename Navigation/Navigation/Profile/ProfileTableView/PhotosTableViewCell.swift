@@ -36,7 +36,6 @@ final class PhotosTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: "arrow.right"), for: .normal)
         button.tintColor = .black
-//        button.addTarget(self, action: #selector(navigationButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -51,11 +50,7 @@ final class PhotosTableViewCell: UITableViewCell {
     }
     
     
-//    @objc func navigationButtonAction() {
-//        TODO: Меняем когда появится VC
-//        let vc = LogInViewController()
-//        UINavigationController.pushViewController(vc, animated: true)
-//            }
+
     
     private func setupLayout() {
         [tablePhotosCollectionView, photosLabel, navigationButton].forEach {
@@ -78,8 +73,8 @@ final class PhotosTableViewCell: UITableViewCell {
 }
 
 
+
 extension PhotosTableViewCell: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photosModel.count
     }
@@ -92,8 +87,8 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     }
 }
 
+
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
-//MARK: Размеры картинок
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let wigth = (collectionView.bounds.width - 8 * 3 - 2 * 12) / 4
         return CGSize(width: wigth, height: wigth)
@@ -104,9 +99,4 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
-    
-    
 }
-
-
-//TODO: Ячейка из tabbleview нормально кастит свой размер. Проблема в том что этот размер задается ДО развертывания contentView

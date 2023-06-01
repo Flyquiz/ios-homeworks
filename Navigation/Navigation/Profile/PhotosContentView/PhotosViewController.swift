@@ -57,7 +57,6 @@ final class PhotosViewController: UIViewController {
 }
 
 extension PhotosViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photosModel.count
     }

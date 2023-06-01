@@ -27,6 +27,7 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -59,9 +60,9 @@ final class ProfileViewController: UIViewController {
     }
 }
 
-//MARK: DataSource
+
+
 extension ProfileViewController: UITableViewDataSource {
-//MARK: Кол-во ячеек
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -70,7 +71,7 @@ extension ProfileViewController: UITableViewDataSource {
             return postModel.count
         }
     }
-//MARK: Добавление ячеек
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -82,14 +83,14 @@ extension ProfileViewController: UITableViewDataSource {
             return tableCell
         }
     }
-//MARK: Кол-во секций
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 }
-//MARK: Delegate
+
+
 extension ProfileViewController: UITableViewDelegate {
-//MARK: Хедер
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
@@ -117,6 +118,7 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
 }
+
 
 extension UIView {
     static var identifier: String {

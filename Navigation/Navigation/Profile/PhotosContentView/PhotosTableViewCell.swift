@@ -34,7 +34,8 @@ final class PhotosTableViewCell: UITableViewCell {
     private let navigationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setBackgroundImage(UIImage(named: "arrow.right"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.tintColor = .black
 //        button.addTarget(self, action: #selector(navigationButtonAction), for: .touchUpInside)
         return button
     }()
@@ -50,16 +51,22 @@ final class PhotosTableViewCell: UITableViewCell {
     }
     
     
+//    @objc func navigationButtonAction() {
+//        TODO: Меняем когда появится VC
+//        let vc = LogInViewController()
+//        UINavigationController.pushViewController(vc, animated: true)
+//            }
+    
     private func setupLayout() {
         [tablePhotosCollectionView, photosLabel, navigationButton].forEach {
             contentView.addSubview($0)
         }
-        //TODO: Возможно лейаут опять мертворожденный. Нужно попробовать задать отступы через делегат скроллвью
+
         NSLayoutConstraint.activate([
             photosLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             photosLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             
-            navigationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 12),
+            navigationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             navigationButton.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
             
             tablePhotosCollectionView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor),
@@ -87,14 +94,14 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
 //MARK: Размеры картинок
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let wigth = (collectionView.bounds.width - 12 * 4) / 4
+        let wigth = (collectionView.bounds.width - 8 * 3 - 2 * 12) / 4
         return CGSize(width: wigth, height: wigth)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
     
     

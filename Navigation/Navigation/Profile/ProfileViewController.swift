@@ -32,6 +32,12 @@ final class ProfileViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+        mainTableView.reloadData()
+    }
+    
     private func setupLayout() {
         view.addSubview(mainTableView)
         view.addSubview(statusBarView)
@@ -92,6 +98,22 @@ extension ProfileViewController: UITableViewDelegate {
             return header
         default:
             return nil
+        }
+    }
+//TODO: Заглушка для высоты ячейки
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 150
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+        default: break
         }
     }
 }

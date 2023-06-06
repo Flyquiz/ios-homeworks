@@ -142,10 +142,13 @@ final class ProfileHeaderView: UIView {
         avatarImageView.addGestureRecognizer(tapGesture)
     }
     @objc func tapAction() {
-        print("tap")
-        UIImageView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut) { [self] in
-            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0)
-            avatarImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut) { [self] in
+            avatarImageWidthAnchor.constant = UIScreen.main.bounds.width
+            avatarImageHeightAnchor.constant = avatarImageWidthAnchor.constant
+            avatarImageLeadingAnchor.constant = 0
+            avatarImageTopAnchor.constant = UIScreen.main.bounds.height / 2 - avatarImageWidthAnchor.constant / 3 * 2
+            self.layoutIfNeeded()
+            avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
         }
     }
 }

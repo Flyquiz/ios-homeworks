@@ -69,6 +69,17 @@ final class ProfileHeaderView: UIView {
         button.addTarget(self, action: #selector(statusButtonAction), for: .touchUpInside)
         return button
     }()
+    
+    private lazy var returnAnimationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "x.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30)), for: .normal)
+        button.tintColor = .white
+        button.alpha = 0.0
+        button.isEnabled = false
+        
+        return button
+    }()
 
     private var avatarImageTopAnchor = NSLayoutConstraint()
     private var avatarImageLeadingAnchor = NSLayoutConstraint()
@@ -98,9 +109,10 @@ final class ProfileHeaderView: UIView {
     }
 
     private func setupLayout() {
-        [avatarImageView, fullNameLabel, statusLabel, statusButton, statusTextField].forEach {
+        [avatarImageView, fullNameLabel, statusLabel, statusButton, statusTextField, returnAnimationButton].forEach {
             addSubview($0)
         }
+        self.bringSubviewToFront(returnAnimationButton)
         self.bringSubviewToFront(avatarImageView)
         
         avatarImageTopAnchor = avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16)
@@ -133,7 +145,10 @@ final class ProfileHeaderView: UIView {
                 statusTextField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -7),
                 statusTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: avatarImageInset + 20),
                 statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-                statusTextField.heightAnchor.constraint(equalToConstant: 40)
+                statusTextField.heightAnchor.constraint(equalToConstant: 40),
+                
+                returnAnimationButton.topAnchor.constraint(equalTo: topAnchor),
+                returnAnimationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
             ])
     }
     
@@ -149,6 +164,11 @@ final class ProfileHeaderView: UIView {
             avatarImageTopAnchor.constant = UIScreen.main.bounds.height / 2 - avatarImageWidthAnchor.constant / 3 * 2
             self.layoutIfNeeded()
             avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) { [self] in
+                returnAnimationButton.alpha = 1.0
+                returnAnimationButton.isEnabled = true
+            }
         }
     }
 }

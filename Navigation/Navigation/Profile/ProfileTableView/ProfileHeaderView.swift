@@ -174,7 +174,6 @@ final class ProfileHeaderView: UIView {
             avatarImageLeadingAnchor.constant = 0
             avatarImageTopAnchor.constant = UIScreen.main.bounds.height / 2 - avatarImageWidthAnchor.constant / 3 * 2
             self.layoutIfNeeded()
-//            avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
             avatarImageView.layer.cornerRadius = 0.0
         } completion: { _ in
             UIView.animate(withDuration: 0.3) { [self] in

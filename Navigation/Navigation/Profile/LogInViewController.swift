@@ -177,7 +177,7 @@ final class LogInViewController: UIViewController {
             authStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             authStackView.heightAnchor.constraint(equalToConstant: 100),
             
-            usernameTextField.heightAnchor.constraint(equalToConstant: 49.25),
+            usernameTextField.heightAnchor.constraint(equalToConstant: 49.75),
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
             passwordTextField.heightAnchor.constraint(equalTo: usernameTextField.heightAnchor),
             

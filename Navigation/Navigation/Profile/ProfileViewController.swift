@@ -11,14 +11,8 @@ final class ProfileViewController: UIViewController {
     
     private let postModel = Post.makeMockModel()
     
-    private let statusBarView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private lazy var mainTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
@@ -41,18 +35,10 @@ final class ProfileViewController: UIViewController {
     
     private func setupLayout() {
         view.addSubview(mainTableView)
-        view.addSubview(statusBarView)
-        
         mainTableView.backgroundColor = .lightGray
-        statusBarView.backgroundColor = mainTableView.backgroundColor
         
         NSLayoutConstraint.activate([
-            statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
-            statusBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            statusBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            statusBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            
-            mainTableView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor),
+            mainTableView.topAnchor.constraint(equalTo: view.topAnchor),
             mainTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mainTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mainTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

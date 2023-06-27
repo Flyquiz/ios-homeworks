@@ -165,7 +165,7 @@ final class LogInViewController: UIViewController {
         for (i, tf) in [usernameTextField, passwordTextField].enumerated() {
             if checkIsEmptyTF(textField: tf) {
                 if checkCharacterInTF(index: i, textField: tf) {
-                    
+                    print("pass")
                 }
             }
         }
@@ -196,9 +196,10 @@ final class LogInViewController: UIViewController {
     private func checkCharacterInTF(index: Int, textField: UITextField) -> Bool {
         guard index == 0 else {
             if textField.text!.count <= 6 {
-                let errorLabel = UILabel()
-                errorLabel.translatesAutoresizingMaskIntoConstraints = false
-                
+                errorPasswordLabel.alpha = 1.0
+                UIView.animate(withDuration: 0.5, delay: 1.0) {
+                    self.errorPasswordLabel.alpha = 0.0
+                }
                 return false
             } else {
                 return true

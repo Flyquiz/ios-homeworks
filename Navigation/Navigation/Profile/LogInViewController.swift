@@ -138,9 +138,43 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func logInButtonAction() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+        for (i, tf) in [usernameTextField, passwordTextField].enumerated() {
+            if checkIsEmptyTF(textField: tf) {
+                if checkCharacterInTF(index: i, textField: tf) {
+                    
+                }
+            }
+        }
     }
     
+    //                navigationController?.pushViewController(ProfileViewController(), animated: true)
+    
+    private func checkIsEmptyTF(textField: UITextField) -> Bool {
+        if textField.text == "" {
+            let errorView = UIView()
+            authStackView.addSubview(errorView)
+            errorView.frame = textField.frame
+            errorView.center = textField.center
+            errorView.backgroundColor = .systemRed
+            
+            UIView.animate(withDuration: 0.5) {
+                errorView.alpha = 0.0
+            } completion: { _ in
+                errorView.removeFromSuperview()
+            }
+            
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    private func checkCharacterInTF(index: Int, textField: UITextField) -> Bool {
+
+        return true
+    }
+    
+//    MARK: Layout
     private func setupLayout() {
         view.backgroundColor = .white
         view.addSubview(scrollView)

@@ -162,13 +162,34 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func logInButtonAction() {
+        var isCorrectUsername = false
+        var isCorrectPassword = false
+        
+        var isEmptyCheckPass = false
+        var isPasswordLengthCheckPass = false
+        
         for (i, tf) in [usernameTextField, passwordTextField].enumerated() {
             if checkIsEmptyTF(textField: tf) {
                 if checkCharacterInTF(index: i, textField: tf) {
-                    print("pass")
+                    if authDataValidation(index: i, textField: tf) {
+                        switch i {
+                        case 0:
+                            isCorrectUsername = true
+                        case 1:
+                            isCorrectPassword = true
+                        default:
+                            break
+                        }
+                    } else {
+                        let alert = UIAlertController(title: "Ошибка", message: "Неправильный логин или пароль", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        present(alert, animated: true)
+                        break
+                    }
                 }
             }
         }
+        
     }
     
     //                navigationController?.pushViewController(ProfileViewController(), animated: true)
@@ -188,11 +209,8 @@ final class LogInViewController: UIViewController {
             }
             
             return false
-        } else {
-            return true
-        }
+        } else { return true }
     }
-    
     private func checkCharacterInTF(index: Int, textField: UITextField) -> Bool {
         guard index == 0 else {
             if textField.text!.count <= 6 {
@@ -201,11 +219,30 @@ final class LogInViewController: UIViewController {
                     self.errorPasswordLabel.alpha = 0.0
                 }
                 return false
-            } else {
-                return true
-            }
+            } else { return true }
         }
         return true
+    }
+    private func authDataValidation(index: Int, textField: UITextField) -> Bool {
+        let username = "Sample@email.com"
+        let password = "111111"
+        
+        switch index {
+        case 0:
+            if username == textField.text {
+                return true
+            } else {
+                return false
+            }
+        case 1:
+            if password == textField.text {
+                return true
+            } else {
+                return false
+            }
+        default:
+            return false
+        }
     }
     
 //    MARK: Layout

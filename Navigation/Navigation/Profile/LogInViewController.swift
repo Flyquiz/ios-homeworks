@@ -108,19 +108,6 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
-//    private let errorRedView: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .systemRed
-//        view.alpha = 0.0
-//        return view
-//    }()
-    
-//    private var errorViewTopAnchor = NSLayoutConstraint()
-//    private var errorViewLeadingAnchor = NSLayoutConstraint()
-//    private var errorViewTrailingAnchor = NSLayoutConstraint()
-//    private var errorViewBottomAnchor = NSLayoutConstraint()
-    
     private lazy var errorPasswordLabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -161,39 +148,54 @@ final class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = .zero
     }
     
+    
+//    MARK: Authentication methods
+//    username - Sample@email.com
+//    password - 111111
     @objc private func logInButtonAction() {
+        let textFields = [usernameTextField, passwordTextField]
+        
+        var counterEmptyTFPass = 0
+        var counterValidation = 0
+        var isCorrectPasswordLength = false
+        
         var isCorrectUsername = false
         var isCorrectPassword = false
         
-        var isEmptyCheckPass = false
-        var isPasswordLengthCheckPass = false
-        
-        for (i, tf) in [usernameTextField, passwordTextField].enumerated() {
-            if checkIsEmptyTF(textField: tf) {
-                if checkCharacterInTF(index: i, textField: tf) {
-                    if authDataValidation(index: i, textField: tf) {
-                        switch i {
-                        case 0:
-                            isCorrectUsername = true
-                        case 1:
-                            isCorrectPassword = true
-                        default:
-                            break
-                        }
-                    } else {
-                        let alert = UIAlertController(title: "Ошибка", message: "Неправильный логин или пароль", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default))
-                        present(alert, animated: true)
-                        break
-                    }
-                }
+        for textField in textFields {
+            if checkIsEmptyTF(textField: textField) {
+                counterEmptyTFPass += 1
             }
         }
         
+        if counterEmptyTFPass == 2 {
+            isCorrectPasswordLength = checkCharacterInTF(textField: passwordTextField)
+        }
+        
+        if isCorrectPasswordLength {
+            for (i, tf) in textFields.enumerated() {
+                switch i {
+                case 0:
+                    isCorrectUsername = authDataValidation(index: i, textField: tf)
+                case 1:
+                    isCorrectPassword = authDataValidation(index: i, textField: tf)
+                default: break
+                }
+                counterValidation += 1
+            }
+        }
+        
+        if counterValidation == 2 {
+            if isCorrectUsername && isCorrectPassword {
+                navigationController?.pushViewController(ProfileViewController(), animated: true)
+            } else {
+                let alert = UIAlertController(title: "Ошибка", message: "Неправильный логин или пароль", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                
+            }
+        }
     }
-    
-    //                navigationController?.pushViewController(ProfileViewController(), animated: true)
-    
     private func checkIsEmptyTF(textField: UITextField) -> Bool {
         if textField.text == "" {
             let errorView = UIView()
@@ -211,17 +213,14 @@ final class LogInViewController: UIViewController {
             return false
         } else { return true }
     }
-    private func checkCharacterInTF(index: Int, textField: UITextField) -> Bool {
-        guard index == 0 else {
-            if textField.text!.count <= 6 {
+    private func checkCharacterInTF(textField: UITextField) -> Bool {
+            if textField.text!.count < 6 {
                 errorPasswordLabel.alpha = 1.0
                 UIView.animate(withDuration: 0.5, delay: 1.0) {
                     self.errorPasswordLabel.alpha = 0.0
                 }
                 return false
             } else { return true }
-        }
-        return true
     }
     private func authDataValidation(index: Int, textField: UITextField) -> Bool {
         let username = "Sample@email.com"
@@ -245,6 +244,8 @@ final class LogInViewController: UIViewController {
         }
     }
     
+    
+    
 //    MARK: Layout
     private func setupLayout() {
         view.backgroundColor = .white
@@ -259,9 +260,7 @@ final class LogInViewController: UIViewController {
         authStackView.addArrangedSubview(usernameTextField)
         authStackView.addArrangedSubview(separatorView)
         authStackView.addArrangedSubview(passwordTextField)
-        
-//        authStackView.addSubview(errorRedView)
-        
+                
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -297,8 +296,6 @@ final class LogInViewController: UIViewController {
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             logInButton.widthAnchor.constraint(equalTo: authStackView.widthAnchor),
             logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            
-//            errorViewTopAnchor, errorViewLeadingAnchor, errorViewTrailingAnchor, errorViewBottomAnchor
         ])
     }
 }

@@ -33,6 +33,7 @@ final class LogInViewController: UIViewController {
         return imageView
     }()
     
+//    MARK: TextFields
     private lazy var usernameTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -107,7 +108,30 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+//    private let errorRedView: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .systemRed
+//        view.alpha = 0.0
+//        return view
+//    }()
+    
+//    private var errorViewTopAnchor = NSLayoutConstraint()
+//    private var errorViewLeadingAnchor = NSLayoutConstraint()
+//    private var errorViewTrailingAnchor = NSLayoutConstraint()
+//    private var errorViewBottomAnchor = NSLayoutConstraint()
+    
+    private lazy var errorPasswordLabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.alpha = 0.0
+        label.text = "Пароль должен содержать не менее 6-ти символов"
+        label.textColor = .systemRed
+        label.font = .systemFont(ofSize: 12, weight: .bold)
+        return label
+    }()
 
+//    MARK: LifeCycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -129,7 +153,7 @@ final class LogInViewController: UIViewController {
     
     @objc private func keyboardShow(notification: Notification) {
         if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            scrollView.contentInset.bottom = keyboardSize.height
+            scrollView.contentInset.bottom = keyboardSize.height + errorPasswordLabel.bounds.height
         }
     }
 
@@ -170,7 +194,16 @@ final class LogInViewController: UIViewController {
     }
     
     private func checkCharacterInTF(index: Int, textField: UITextField) -> Bool {
-
+        guard index == 0 else {
+            if textField.text!.count <= 6 {
+                let errorLabel = UILabel()
+                errorLabel.translatesAutoresizingMaskIntoConstraints = false
+                
+                return false
+            } else {
+                return true
+            }
+        }
         return true
     }
     
@@ -183,10 +216,13 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logoImage)
         contentView.addSubview(authStackView)
         contentView.addSubview(logInButton)
+        contentView.addSubview(errorPasswordLabel)
         
         authStackView.addArrangedSubview(usernameTextField)
         authStackView.addArrangedSubview(separatorView)
         authStackView.addArrangedSubview(passwordTextField)
+        
+//        authStackView.addSubview(errorRedView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -215,12 +251,16 @@ final class LogInViewController: UIViewController {
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
             passwordTextField.heightAnchor.constraint(equalTo: usernameTextField.heightAnchor),
             
+            errorPasswordLabel.topAnchor.constraint(equalTo: authStackView.bottomAnchor, constant: 10),
+            errorPasswordLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            logInButton.topAnchor.constraint(equalTo: authStackView.bottomAnchor, constant: 16),
+            logInButton.topAnchor.constraint(equalTo: errorPasswordLabel.bottomAnchor, constant: 10),
             logInButton.centerXAnchor.constraint(equalTo: authStackView.centerXAnchor),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             logInButton.widthAnchor.constraint(equalTo: authStackView.widthAnchor),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            
+//            errorViewTopAnchor, errorViewLeadingAnchor, errorViewTrailingAnchor, errorViewBottomAnchor
         ])
     }
 }

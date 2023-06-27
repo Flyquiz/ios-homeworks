@@ -108,9 +108,24 @@ final class ProfileHeaderView: UIView {
     
     
     @objc func statusButtonAction() {
-        statusLabel.text = statusText
-        statusTextField.text = nil
-        statusTextField.endEditing(true)
+        if statusTextField.text != "" {
+            statusLabel.text = statusText
+            statusTextField.text = nil
+            statusTextField.endEditing(true)
+        } else {
+            let errorView = UIView()
+            self.addSubview(errorView)
+            errorView.layer.cornerRadius = statusTextField.layer.cornerRadius
+            errorView.frame = statusTextField.frame
+            errorView.center = statusTextField.center
+            errorView.backgroundColor = .systemRed
+            
+            UIView.animate(withDuration: 0.5) {
+                errorView.alpha = 0.0
+            } completion: { _ in
+                errorView.removeFromSuperview()
+            }
+        }
     }
     
     @objc func textFieldAction(_ textField: UITextField) {

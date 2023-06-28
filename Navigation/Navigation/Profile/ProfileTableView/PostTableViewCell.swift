@@ -9,6 +9,10 @@ import UIKit
 
 final class PostTableViewCell: UITableViewCell {
     
+    private var isAlreadyLiked: Bool = false
+    
+    private var cellModel: Post!
+    
     private let authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -41,6 +45,7 @@ final class PostTableViewCell: UITableViewCell {
         label.text = "Likes: "
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -57,6 +62,7 @@ final class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+        setupGesture()
     }
     @available(*,unavailable)
     required init?(coder: NSCoder) {
@@ -74,6 +80,7 @@ final class PostTableViewCell: UITableViewCell {
     }
 
     public func setupCell(model: Post) {
+        cellModel = model
         authorLabel.text = model.author
         descriptionLabel.text = model.description
         postImageView.image = UIImage(named: model.image)
@@ -112,5 +119,20 @@ final class PostTableViewCell: UITableViewCell {
         ])
         authorLabel.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
         descriptionLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    }
+    
+    
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(likesLabelAction))
+        likesLabel.addGestureRecognizer(tapGesture)
+    }
+    @objc private func likesLabelAction() {
+        if isAlreadyLiked == false {
+            var likes = Int((likesLabel.text?.filter("0123456789".contains))!)!
+            likes += 1
+            likesLabel.text = "Likes: " + String(likes)
+            cellModel.likes = likes
+            isAlreadyLiked = true
+        }
     }
 }

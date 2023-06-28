@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    private let postModel = Post.makeMockModel()
+    private let postModel = PostStorage.makeMockModel()
     
     private lazy var mainTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)

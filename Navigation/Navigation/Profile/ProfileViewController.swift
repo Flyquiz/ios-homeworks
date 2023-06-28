@@ -100,7 +100,10 @@ extension ProfileViewController: UITableViewDelegate {
         switch indexPath.section {
         case 0:
             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
-        default: break
+        default:
+            let detailVC = PostDetailViewController()
+            detailVC.setupVC(model: postModel[indexPath.row])
+            present(detailVC, animated: true)
         }
     }
 }

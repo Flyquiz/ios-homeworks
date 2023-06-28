@@ -1,33 +1,43 @@
 //
-//  PostTableViewCell.swift
+//  PostDetailView.swift
 //  Navigation
 //
-//  Created by Иван Захаров on 18.05.2023.
+//  Created by Иван Захаров on 28.06.2023.
 //
 
 import UIKit
 
-final class PostTableViewCell: UITableViewCell {
+final class PostDetailViewController: UIViewController {
     
-    private var isAlreadyLiked: Bool = false
-    private var isAlreadyViewed: Bool = false
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
     
-    private var cellModel: Post!
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
     
     private let authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .black
-        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.numberOfLines = 3
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemGray
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .black
+        label.textAlignment = .natural
         label.numberOfLines = 0
         return label
     }()
@@ -38,6 +48,7 @@ final class PostTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         imageView.isUserInteractionEnabled = true
+//        imageView.bounds.height = imageView.image.f
         return imageView
     }()
     
@@ -60,29 +71,12 @@ final class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupLayout()
-        setupGesture()
-    }
-    @available(*,unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        authorLabel.text = nil
-        descriptionLabel.text = nil
-        postImageView.image = nil
-        likesLabel.text = "Likes: "
-        viewsLabel.text = "Views: "
-    }
-
-    public func setupCell(model: Post) {
-        cellModel = model
+    public func setupVC(model: Post) {
         authorLabel.text = model.author
         descriptionLabel.text = model.description
         postImageView.image = UIImage(named: model.image)
@@ -94,19 +88,35 @@ final class PostTableViewCell: UITableViewCell {
         [authorLabel, descriptionLabel, postImageView, likesLabel, viewsLabel].forEach {
             contentView.addSubview($0)
         }
-        contentView.backgroundColor = .white
+        scrollView.addSubview(contentView)
+        view.addSubview(scrollView)
         
-        let screenWidth = UIScreen.main.bounds.width
+        view.backgroundColor = .white
+        
         let inset: CGFloat = 16
+
         NSLayoutConstraint.activate([
+            
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
             authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
             authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-
-            postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
-            postImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            postImageView.heightAnchor.constraint(equalToConstant: screenWidth),
-            postImageView.widthAnchor.constraint(equalToConstant: screenWidth),
+            authorLabel.heightAnchor.constraint(equalToConstant: authorLabel.intrinsicContentSize.height),
+            
+            postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: inset),
+            postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            postImageView.heightAnchor.constraint(equalToConstant: postImageView.intrinsicContentSize.height),
             
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: inset),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
@@ -119,43 +129,5 @@ final class PostTableViewCell: UITableViewCell {
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
         ])
-        authorLabel.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
-        descriptionLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-    }
-    
-    private func setupGesture() {
-        let likeTapGesture = UITapGestureRecognizer(target: self, action: #selector(likesLabelAction))
-        let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewAction))
-        likesLabel.addGestureRecognizer(likeTapGesture)
-        postImageView.addGestureRecognizer(imageTapGesture)
-    }
-    
-    @objc private func likesLabelAction() {
-        var likes = Int((likesLabel.text?.filter("0123456789".contains))!)!
-        if isAlreadyLiked == false {
-            likes += 1
-            likesLabel.text = "Likes: " + String(likes)
-            cellModel.likes = likes
-            isAlreadyLiked.toggle()
-        } else {
-            likes -= 1
-            likesLabel.text = "Likes: " + String(likes)
-            cellModel.likes = likes
-            isAlreadyLiked.toggle()
-        }
-    }
-    
-    @objc private func imageViewAction() {
-//        let profileVC = ProfileViewController()
-//        profileVC.goToDetailVC(model: cellModel)
-        
-        
-        if isAlreadyViewed == false {
-            var views = Int((viewsLabel.text?.filter("0123456789".contains))!)!
-            views += 1
-            viewsLabel.text = "Views: " + String(views)
-            cellModel.views = views
-            isAlreadyViewed = true
-        }
     }
 }

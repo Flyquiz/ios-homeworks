@@ -37,7 +37,6 @@ final class PostTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
-        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -125,9 +124,7 @@ final class PostTableViewCell: UITableViewCell {
     
     private func setupGesture() {
         let likeTapGesture = UITapGestureRecognizer(target: self, action: #selector(likesLabelAction))
-        let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewAction))
         likesLabel.addGestureRecognizer(likeTapGesture)
-        postImageView.addGestureRecognizer(imageTapGesture)
     }
     
     @objc private func likesLabelAction() {
@@ -142,20 +139,6 @@ final class PostTableViewCell: UITableViewCell {
             likesLabel.text = "Likes: " + String(likes)
             cellModel.likes = likes
             isAlreadyLiked.toggle()
-        }
-    }
-    
-    @objc private func imageViewAction() {
-//        let profileVC = ProfileViewController()
-//        profileVC.goToDetailVC(model: cellModel)
-        
-        
-        if isAlreadyViewed == false {
-            var views = Int((viewsLabel.text?.filter("0123456789".contains))!)!
-            views += 1
-            viewsLabel.text = "Views: " + String(views)
-            cellModel.views = views
-            isAlreadyViewed = true
         }
     }
 }

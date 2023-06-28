@@ -104,6 +104,8 @@ extension ProfileViewController: UITableViewDelegate {
             let detailVC = PostDetailViewController()
             detailVC.setupVC(model: postModel[indexPath.row])
             present(detailVC, animated: true)
+            postModel[indexPath.row].views += 1
+            tableView.reloadData()
         }
     }
 }

@@ -81,7 +81,7 @@ final class PostDetailViewController: UIViewController {
         descriptionLabel.text = model.description
         postImageView.image = UIImage(named: model.image)
         likesLabel.text = (self.likesLabel.text ?? "") + String(model.likes)
-        viewsLabel.text = (self.viewsLabel.text ?? "") + String(model.views)
+        viewsLabel.text = (self.viewsLabel.text ?? "") + String(model.views + 1)
     }
     
     private func setupLayout() {

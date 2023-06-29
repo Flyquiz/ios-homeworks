@@ -36,6 +36,7 @@ final class PhotosTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: "arrow.right"), for: .normal)
         button.tintColor = .black
+        button.isUserInteractionEnabled = false
         return button
     }()
     

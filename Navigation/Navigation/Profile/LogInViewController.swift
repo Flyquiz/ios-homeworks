@@ -33,7 +33,6 @@ final class LogInViewController: UIViewController {
         return imageView
     }()
     
-//    MARK: TextFields
     private lazy var usernameTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +45,8 @@ final class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.setLeftPadding(10)
         textField.delegate = self
+        
+        textField.text = "Sample@email.com"
         return textField
     }()
     
@@ -61,6 +62,8 @@ final class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.setLeftPadding(10)
         textField.delegate = self
+        
+        textField.text = "111111"
         return textField
     }()
     
@@ -118,7 +121,7 @@ final class LogInViewController: UIViewController {
         return label
     }()
 
-//    MARK: LifeCycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -246,7 +249,6 @@ final class LogInViewController: UIViewController {
     
     
     
-//    MARK: Layout
     private func setupLayout() {
         view.backgroundColor = .white
         view.addSubview(scrollView)

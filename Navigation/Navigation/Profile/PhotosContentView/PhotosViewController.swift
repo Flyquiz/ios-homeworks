@@ -86,7 +86,7 @@ final class PhotosViewController: UIViewController {
         view.addSubview(animatingImageView)
         view.addSubview(returnAnimationButton)
         
-        returnAnimationButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        returnAnimationButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 45).isActive = true
         returnAnimationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
         
         animatingImageView.image = image
@@ -100,6 +100,8 @@ final class PhotosViewController: UIViewController {
             
             navigationController?.navigationBar.alpha = 0.1
             navigationController?.navigationBar.isUserInteractionEnabled = false
+            tabBarController?.tabBar.alpha = 0.1
+            tabBarController?.tabBar.isUserInteractionEnabled = false
         } completion: { _ in
             UIView.animate(withDuration: 0.3) { [self] in
                 returnAnimationButton.alpha = 1.0
@@ -114,6 +116,8 @@ final class PhotosViewController: UIViewController {
             
             navigationController?.navigationBar.alpha = 1.0
             navigationController?.navigationBar.isUserInteractionEnabled = true
+            tabBarController?.tabBar.alpha = 1.0
+            tabBarController?.tabBar.isUserInteractionEnabled = true
         } completion: { [self] _ in
             animatingImageView.removeFromSuperview()
             dimmedView.removeFromSuperview()

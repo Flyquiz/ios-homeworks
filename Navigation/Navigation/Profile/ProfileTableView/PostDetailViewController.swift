@@ -48,7 +48,6 @@ final class PostDetailViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         imageView.isUserInteractionEnabled = true
-//        imageView.bounds.height = imageView.image.f
         return imageView
     }()
     
@@ -111,7 +110,6 @@ final class PostDetailViewController: UIViewController {
             authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
             authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            authorLabel.heightAnchor.constraint(equalToConstant: authorLabel.intrinsicContentSize.height),
             
             postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: inset),
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

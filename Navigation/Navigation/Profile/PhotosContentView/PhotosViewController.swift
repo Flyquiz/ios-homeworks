@@ -11,6 +11,10 @@ final class PhotosViewController: UIViewController {
     
     private let photosModel = Photos.makeMockModel()
     
+    private let photoCell = PhotosTableViewCell()
+    
+    private var initialImageRect: CGRect = .zero
+    
     private let statusBarView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +30,19 @@ final class PhotosViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
         return collectionView
+    }()
+    
+    private lazy var animatingImageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
+    
+    private let dimmedView: UIView = {
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.alpha = 0.0
+        return view
     }()
 
     override func viewDidLoad() {
@@ -54,7 +71,23 @@ final class PhotosViewController: UIViewController {
             photosCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    private func animateImage(_ image: UIImage?, imageFrame: CGRect) {
+//        view.addSubview(dimmedView)
+        view.addSubview(animatingImageView)
+        animatingImageView.image = image
+        animatingImageView.frame = CGRect(x: imageFrame.origin.x, y: imageFrame.origin.y, width: imageFrame.width, height: imageFrame.height)
+        
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut) { [self] in
+            animatingImageView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+            animatingImageView.center = view.center
+            animatingImageView.layer.cornerRadius = UIScreen.main.bounds.width / 2
+//            dimmedView.alpha = 1.0
+        }
+    }
 }
+
+
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -63,10 +96,12 @@ extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
-        cell.setupCell(model: photosModel[indexPath.item])
+        cell.setupCell(model: photosModel[indexPath.item], indexPath: indexPath)
+        cell.delegate = self
         return cell
     }
 }
+
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     
@@ -87,5 +122,16 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return inset
+    }
+}
+
+
+extension PhotosViewController: CollectionViewCellDelegate {
+    func didTapImage(_ image: UIImage?, imageRect: CGRect, indexPath: IndexPath) {
+        let cellLayoutAttributes = photosCollectionView.layoutAttributesForItem(at: indexPath)
+        let currentCellRect = photosCollectionView.convert(cellLayoutAttributes!.frame, to: view)
+        initialImageRect = CGRect(x: imageRect.origin.x + currentCellRect.origin.x, y: imageRect.origin.y + currentCellRect.origin.y, width: imageRect.width, height: imageRect.height)
+        
+        animateImage(image, imageFrame: initialImageRect)
     }
 }

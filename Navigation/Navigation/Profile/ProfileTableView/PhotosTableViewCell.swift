@@ -81,7 +81,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
-        cell.setupCell(model: photosModel[indexPath.item])
+        cell.setupCell(model: photosModel[indexPath.item], indexPath: indexPath)
         cell.changeImageCornerRadius()
         return cell
     }

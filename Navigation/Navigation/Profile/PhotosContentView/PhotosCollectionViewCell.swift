@@ -7,13 +7,24 @@
 
 import UIKit
 
+
+protocol CollectionViewCellDelegate: AnyObject {
+    func didTapImage(_ image: UIImage?, imageRect: CGRect, indexPath: IndexPath)
+}
+
+
 final class PhotosCollectionViewCell: UICollectionViewCell {
     
+    weak var delegate: CollectionViewCellDelegate?
+    
+    var cellIndex: IndexPath!
+        
     private let cellImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -21,6 +32,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
+        setupGesture()
     }
     @available(*,unavailable)
     required init?(coder: NSCoder) {
@@ -32,8 +44,9 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         cellImageView.image = nil
     }
     
-    public func setupCell(model: Photos) {
+    public func setupCell(model: Photos, indexPath: IndexPath) {
         cellImageView.image = model.image
+        cellIndex = indexPath
     }
     
     public func changeImageCornerRadius() {
@@ -48,5 +61,14 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
             cellImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             cellImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        cellImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func tapAction() {
+        delegate?.didTapImage(cellImageView.image, imageRect: cellImageView.frame, indexPath: cellIndex)
     }
 }

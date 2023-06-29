@@ -39,10 +39,19 @@ final class PhotosViewController: UIViewController {
     
     private let dimmedView: UIView = {
         let view = UIView(frame: UIScreen.main.bounds)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         view.alpha = 0.0
         return view
+    }()
+    
+    private lazy var returnAnimationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "x.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30)), for: .normal)
+        button.tintColor = .white
+        button.alpha = 0.0
+        button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
+        return button
     }()
 
     override func viewDidLoad() {
@@ -73,16 +82,42 @@ final class PhotosViewController: UIViewController {
     }
     
     private func animateImage(_ image: UIImage?, imageFrame: CGRect) {
-//        view.addSubview(dimmedView)
+        view.addSubview(dimmedView)
         view.addSubview(animatingImageView)
+        view.addSubview(returnAnimationButton)
+        
+        returnAnimationButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        returnAnimationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        
         animatingImageView.image = image
         animatingImageView.frame = CGRect(x: imageFrame.origin.x, y: imageFrame.origin.y, width: imageFrame.width, height: imageFrame.height)
         
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut) { [self] in
             animatingImageView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             animatingImageView.center = view.center
-            animatingImageView.layer.cornerRadius = UIScreen.main.bounds.width / 2
-//            dimmedView.alpha = 1.0
+            
+            dimmedView.alpha = 0.9
+            
+            navigationController?.navigationBar.alpha = 0.1
+            navigationController?.navigationBar.isUserInteractionEnabled = false
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) { [self] in
+                returnAnimationButton.alpha = 1.0
+            }
+        }
+    }
+    @objc func returnButtonAction() {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1.0) { [self] in
+            animatingImageView.frame = initialImageRect
+            dimmedView.alpha = 0
+            returnAnimationButton.alpha = 0.0
+            
+            navigationController?.navigationBar.alpha = 1.0
+            navigationController?.navigationBar.isUserInteractionEnabled = true
+        } completion: { [self] _ in
+            animatingImageView.removeFromSuperview()
+            dimmedView.removeFromSuperview()
+            returnAnimationButton.removeFromSuperview()
         }
     }
 }
